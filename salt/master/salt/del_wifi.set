@@ -1,0 +1,2 @@
+delete interfaces {{ template_vars['iface_name'] }}
+set interfaces interface-range PC member {{ template_vars['iface_name'] }}

@@ -1,0 +1,3 @@
+delete interfaces interface-range PC member {{ template_vars['iface_name'] }}
+set interfaces {{ template_vars['iface_name'] }} description {{ template_vars['ap_name'] }}
+set interfaces {{ template_vars['iface_name'] }} apply-groups WIFI

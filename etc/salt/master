@@ -1,0 +1,22 @@
+ipv6: False
+
+file_roots:
+ base:
+  - /salt/master/salt
+
+pillar_roots:
+ base:
+  - /salt/master/pillar
+ 
+engines:
+  - junos_syslog:
+      port: 9999
+      topic: jnpr/syslog/hostip/daemon/event
+      daemon:
+        - lldpd
+
+reactor:
+  - 'jnpr/syslog/*/lldpd/LLDP_NEIGHBOR_DOWN':
+    - /salt/master/reactor/react_to_lldp_down.sls
+  - 'jnpr/syslog/*/lldpd/LLDP_NEIGHBOR_UP':
+    - /salt/master/reactor/react_to_lldp_up.sls

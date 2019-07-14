@@ -1,0 +1,20 @@
+set groups WIFI interfaces <*> unit 0 family ethernet-switching port-mode trunk
+set groups WIFI interfaces <*> unit 0 family ethernet-switching vlan members W_ToIP
+set groups WIFI interfaces <*> unit 0 family ethernet-switching vlan members W_PC
+set groups WIFI interfaces <*> unit 0 family ethernet-switching native-vlan-id 4
+set system host-name SWITCHTEST
+set system services ssh
+set system services netconf ssh
+set system syslog host 192.168.0.1 daemon info
+set system syslog host 192.168.0.1 port 9999
+wildcard set interfaces interface-range PC member ge-0/0/[0-47]
+set interfaces interface-range PC unit 0 family ethernet-switching port-mode access
+set interfaces interface-range PC unit 0 family ethernet-switching vlan members W_PC
+set interfaces vlan unit 5 family inet address 192.168.0.254/24
+set protocols lldp interface all
+set vlans Switchs vlan-id 5
+set vlans Switchs l3-interface vlan.5
+set vlans W_PC vlan-id 2
+set vlans W_ToIP vlan-id 3
+set vlans WifiAP vlan-id 4
+set poe interface all
